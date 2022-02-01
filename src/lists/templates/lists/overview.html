@@ -24,11 +24,19 @@
         </div>
     </div>
     <table class="table table-sm table-striped">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Subscriber count</th>
+    </tr>
+    </thead>
         <tbody>
         {% for list in lists %}
             <tr>
                 <td>{{ list.name }}</td>
                 <td>{{ list.description }}</td>
+                <td>{{ list.subscriber_count }}</td>
             </tr>
         {% endfor %}
         </tbody>
