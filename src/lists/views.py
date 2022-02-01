@@ -12,8 +12,8 @@ def login(request):
 def list_overview(request):
     lists = List.objects.all()
 
-    query = request.GET.get("query")
+    query = request.GET.get("query", "")
     if query:
         lists = lists.filter(name__icontains=query)
 
-    return render(request, "lists/overview.html", {"lists": lists})
+    return render(request, "lists/overview.html", {"lists": lists, "query": query})

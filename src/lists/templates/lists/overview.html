@@ -5,14 +5,27 @@
 {% block title %}Lists{% endblock %}
 
 {% block contents %}
-<table class="table table-sm table-striped">
-    <tbody>
-    {% for list in lists %}
-        <tr>
-        <td>{{ list.name }}</td>
-        <td>{{ list.description }}</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+
+    <form action="" method="get">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search for lists"
+                   aria-label="Search for lists" aria-describedby="button-addon2"
+                   name="query" value="{{ query }}"
+            >
+            <input class="btn btn-outline-secondary" type="submit" id="btn_search" value="Search">
+            {% if query %}
+            <a class="btn btn-outline-secondary" id="btn_clear_filter" href="{% url 'lists-overview' %}">Clear</a>
+            {% endif %}
+        </div>
+    </form>
+    <table class="table table-sm table-striped">
+        <tbody>
+        {% for list in lists %}
+            <tr>
+                <td>{{ list.name }}</td>
+                <td>{{ list.description }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
