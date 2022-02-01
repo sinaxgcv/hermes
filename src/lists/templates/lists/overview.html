@@ -34,7 +34,7 @@
         <tbody>
         {% for list in lists %}
             <tr>
-                <td>{{ list.name }}</td>
+                <td><a href="{% url 'lists-details' list.id %}">{{ list.name }}</a></td>
                 <td>{{ list.description }}</td>
                 <td>{{ list.subscriber_count }}</td>
             </tr>
