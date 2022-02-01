@@ -62,10 +62,11 @@ class ListViewTest(TestCase):
         data = {"name": "Test List Creation", "description": ""}
         response = self.client.post(reverse("lists-create"), data)
 
-        self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, reverse("lists-overview"))
         created_list = List.objects.latest("id")
         self.assertEqual(created_list.name, "Test List Creation")
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse("lists-details", args=[created_list.id]))
 
     def test_list_details_unauthenticated(self):
         response = self.client.get(reverse("lists-details", args=[self.list1.id]))

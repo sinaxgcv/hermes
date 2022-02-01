@@ -26,8 +26,8 @@ def list_add_edit(request, list_id: int = None):
     if request.method == "POST":
         form = ListForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect(reverse("lists-overview"))
+            subscriber_list = form.save()
+            return redirect(reverse("lists-details", args=[subscriber_list.id]))
     else:
         form = ListForm()
     return render(request, "lists/form.html", {"form": form})
