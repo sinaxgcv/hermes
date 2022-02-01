@@ -13,6 +13,10 @@ class List(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def subscriber_count(self):
+        return self.subscriber_set.all().count()
+
 
 class Subscriber(models.Model):
     email = models.EmailField(unique=True)

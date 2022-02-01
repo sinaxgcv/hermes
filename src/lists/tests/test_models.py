@@ -16,6 +16,23 @@ class ListTest(TestCase):
         expected_str = my_list.name
         self.assertEqual(expected_str, my_list.__str__())
 
+    def test_subscriber_count(self):
+        list_1 = ListFactory(name="List1")
+        list_2 = ListFactory(name="List2")
+
+        subscriber1 = SubscriberFactory()
+        subscriber1.lists.add(list_1)
+
+        subscriber2 = SubscriberFactory()
+        subscriber2.lists.add(list_1)
+
+        subscriber3 = SubscriberFactory()
+        subscriber3.lists.add(list_2)
+
+        self.assertEqual(list_1.subscriber_count, 2)
+
+        self.assertEqual(list_2.subscriber_count, 1)
+
 
 class SubscriberTest(TestCase):
     def test_repr(self):
