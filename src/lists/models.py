@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 
 
@@ -16,6 +18,9 @@ class Subscriber(models.Model):
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=200, blank=True, default="")
     last_name = models.CharField(max_length=200, blank=True, default="")
+
+    confirmation_key = models.UUIDField(default=uuid.uuid4)
+    confirmed_on = models.DateTimeField(blank=True, null=True)
 
     lists = models.ManyToManyField(List)
 
