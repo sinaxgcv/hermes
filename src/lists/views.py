@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 
 from lists.forms import ListForm
@@ -31,3 +31,9 @@ def list_add_edit(request, list_id: int = None):
     else:
         form = ListForm()
     return render(request, "lists/form.html", {"form": form})
+
+
+@login_required
+def list_details(request, list_id: int):
+    subscriber_list = get_object_or_404(List, pk=list_id)
+    return render(request, "lists/details.html", {"subscriber_list": subscriber_list})

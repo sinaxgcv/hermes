@@ -66,3 +66,28 @@ class ListViewTest(TestCase):
         self.assertRedirects(response, reverse("lists-overview"))
         created_list = List.objects.latest("id")
         self.assertEqual(created_list.name, "Test List Creation")
+
+    def test_list_details_unauthenticated(self):
+        response = self.client.get(reverse("lists-details", args=[self.list1.id]))
+
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(
+            response,
+            reverse("login")
+            + "?next="
+            + reverse("lists-details", args=[self.list1.id]),
+        )
+
+    def test_list_details_404(self):
+        self.client.force_login(self.user)
+        response = self.client.get(reverse("lists-details", args=[9999]))
+
+        self.assertEqual(response.status_code, 404)
+
+    def test_list_details(self):
+        self.client.force_login(self.user)
+        response = self.client.get(reverse("lists-details", args=[self.list1.id]))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, "lists/details.html")
+        self.assertEqual(response.context["subscriber_list"], self.list1)
