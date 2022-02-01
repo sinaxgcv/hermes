@@ -6,18 +6,23 @@
 
 {% block contents %}
 
-    <form action="" method="get">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search for lists"
-                   aria-label="Search for lists" aria-describedby="button-addon2"
-                   name="query" value="{{ query }}"
-            >
-            <input class="btn btn-outline-secondary" type="submit" id="btn_search" value="Search">
-            {% if query %}
-            <a class="btn btn-outline-secondary" id="btn_clear_filter" href="{% url 'lists-overview' %}">Clear</a>
-            {% endif %}
+    <div class="row">
+        <form action="" method="get" class="col-md-10 col-lg-10 col-xl-10 col-xxl-10">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search for lists"
+                       aria-label="Search for lists" aria-describedby="button-addon2"
+                       name="query" value="{{ query }}"
+                >
+                <input class="btn btn-outline-secondary" type="submit" id="btn_search" value="Search">
+                {% if query %}
+                    <a class="btn btn-outline-secondary" id="btn_clear_filter" href="{% url 'lists-overview' %}">Clear</a>
+                {% endif %}
+            </div>
+        </form>
+        <div class="col-md-2 col-lg-2 col-xl-2 col-xxl-2">
+            <a class="btn btn-success" href="{% url 'lists-create' %}">Create List</a>
         </div>
-    </form>
+    </div>
     <table class="table table-sm table-striped">
         <tbody>
         {% for list in lists %}

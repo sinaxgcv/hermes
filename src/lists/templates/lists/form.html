@@ -1,0 +1,10 @@
+{% extends "core/base.html" %}
+{% load crispy_forms_tags %}
+{% block nav-lists %}active{% endblock %}
+
+{% block page-title %}Lists{% endblock %}
+{% block title %}Lists{% endblock %}
+
+{% block contents %}
+    {% crispy form %}
+{% endblock %}
